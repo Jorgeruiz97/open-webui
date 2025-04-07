@@ -31,7 +31,8 @@ RUN npm ci
 
 COPY . .
 ENV APP_BUILD_HASH=${BUILD_HASH}
-RUN npm run build
+ARG NODE_OPTIONS
+RUN NODE_OPTIONS="${NODE_OPTIONS}" npm run build
 
 ######## WebUI backend ########
 FROM python:3.11-slim-bookworm AS base
