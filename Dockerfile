@@ -32,7 +32,8 @@ RUN npm ci
 COPY . .
 ENV APP_BUILD_HASH=${BUILD_HASH}
 ARG NODE_OPTIONS
-RUN NODE_OPTIONS="${NODE_OPTIONS}" npm run build
+RUN if [ -n "$NODE_OPTIONS" ]; then export NODE_OPTIONS="${NODE_OPTIONS}"; fi
+RUN npm run build
 
 ######## WebUI backend ########
 FROM python:3.11-slim-bookworm AS base
